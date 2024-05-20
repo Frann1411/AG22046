@@ -1,0 +1,43 @@
+;escribir un programa para multiplicar 2 enteros
+;usando registros de 8bits
+;ag22046
+
+section .data
+    ; Definir los 2 num enteros de 8 bits
+    num1 db 10
+    num2 db 3
+
+section .text
+    global _start
+
+_start:
+    ; Cargar los valores de los números en registros de 8 bits
+    mov al, [num1]
+    mov bl, [num2]
+
+    ; Realizar la multiplicación
+    mul bl
+
+    ; El resultado se almacena en AX parte baja, y DX parte alta
+    
+
+    ; Convertir el resultado en su representación ASCII
+    add ax, '0'
+
+    ; Almacenar el resultado en un registro de 8 bits
+    mov [resultado], al
+
+    ; Imprimir el resultado
+    mov eax, 4
+    mov ebx, 1
+    mov ecx, resultado
+    mov edx, 1
+    int 0x80
+
+    ; Salida del programa
+    mov eax, 1
+    mov ebx, 0
+    int 0x80
+
+section .bss
+    resultado resb 1
